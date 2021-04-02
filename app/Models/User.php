@@ -2,16 +2,26 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, HasFactory;
+    use Authenticatable, Authorizable, HasFactory, SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+    const VERIFIED_USER = '1';
+    const UNVERIFIED_USER = '0';
+
+    const ADMIN_USER = 'true';
+    const REGULAR_USER = 'false';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +29,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 
+        'email', 
+        'verified',
+        'verification_token',
+        'admin',
+        'image',
+        'client_details',
     ];
 
     /**
@@ -29,5 +45,36 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = [
         'password',
+        'remember_token', 'pivot',
     ];
+
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = strtolower($name);
+    }
+
+    public function getNameAttribute($name)
+    {
+        return ucwords($name);
+    }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = strtolower($email);
+    }
+
+    public function isVerified()
+    {
+        return $this->verified == User::VERIFIED_USER;
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin == User::ADMIN_USER;
+    }
+
+    public static function generateVerificationCode()
+    {
+        return Str::random(40);
+    }
 }
