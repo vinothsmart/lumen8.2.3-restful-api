@@ -24,6 +24,10 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
+            'image' => 'default.jpg',
+            'verified' => User::UNVERIFIED_USER,
+            'verification_token' => null,
+            'admin' => User::REGULAR_USER,
         ];
     }
 }
