@@ -20,7 +20,8 @@ $router->get('/', function () use ($router) {
 /**
  * Roles
  */
-$router->group(['prefix' => 'api/admin'], function () use ($router) {
+// $router->group(['prefix' => 'api/admin'], function () use ($router) {
+$router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('roles', ['as' => 'roles.store', 'uses' => 'RoleController@store']);
     $router->get('roles', ['as' => 'roles.index', 'uses' => 'RoleController@index']);
     $router->get('roles/{role}', ['as' => 'roles.show', 'uses' => 'RoleController@show']);
