@@ -46,15 +46,16 @@ class RoleController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $role
+     * @param  int  $roleId
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    // public function show($Role $role)
+    public function show($roleId)
     {
-        return $this->showOne($role);
+        $role = Role::where('id', $roleId)->get();
+        // return $this->showOne($role);
+        return $role;
     }
-
-   
 
     /**
      * Update the specified resource in storage.
