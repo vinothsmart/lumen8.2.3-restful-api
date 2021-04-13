@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
@@ -52,15 +53,15 @@ class UserFactory extends Factory
                 $userRoleAssign = [
                     'role_id' => 1,
                     'user_id' => $user->id,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s"),
                 ];
             } else {
                 $userRoleAssign = [
                     'role_id' => Role::where('id', '>', 1)->get()->random()->id,
                     'user_id' => $user->id,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s"),
                 ];
             }
             DB::table('role_user')->insert($userRoleAssign);
@@ -82,7 +83,7 @@ class UserFactory extends Factory
             }
 
             $updateUser = User::findOrFail($user->id);
-            $updateUser->email_verified_at = $isAdmin == true ? now() : null;
+            $updateUser->email_verified_at = $isAdmin == true ? date("Y-m-d H:i:s") : null;
             $updateUser->verified = $isAdmin == true ? User::VERIFIED_USER : User::UNVERIFIED_USER;
             $updateUser->verification_token = $isAdmin == true ? null : User::generateVerificationCode();
             $updateUser->admin = $isAdmin == true ? User::ADMIN_USER : User::REGULAR_USER;
