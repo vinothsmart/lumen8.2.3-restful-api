@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
@@ -13,8 +15,17 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            RoleSeeder::class,
-        ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+
+        // Truncate the role table
+        Role::truncate();
+
+        // Clear the role events
+        Role::flushEventListeners();
+
+        // Add roles
+        Role::factory()->create(['role' => 'SuperAdmin']);
+        Role::factory()->create(['role' => 'Admin']);
+        Role::factory()->create(['role' => 'User']);
     }
 }

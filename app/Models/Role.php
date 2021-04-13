@@ -14,7 +14,7 @@ class Role extends Model
 
     protected $dates = ['deleted_at'];
 
-    public $transformer = RoleTransformer::class;
+    // public $transformer = RoleTransformer::class;
 
     /**
      * The attributes that are mass assignable.
