@@ -29,8 +29,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 
-        'email', 
+        'name',
+        'email',
         'verified',
         'verification_token',
         'admin',
@@ -76,5 +76,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public static function generateVerificationCode()
     {
         return Str::random(40);
+    }
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
     }
 }
