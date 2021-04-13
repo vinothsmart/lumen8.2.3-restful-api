@@ -24,6 +24,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('roles', ['as' => 'roles.store', 'uses' => 'Role\RoleController@store']);
     $router->get('roles', ['as' => 'roles.index', 'uses' => 'Role\RoleController@index']);
+    $router->get('rolesList', ['as' => 'roles.list', 'uses' => 'Role\RoleController@list']);
     $router->get('roles/{role}', ['as' => 'roles.show', 'uses' => 'Role\RoleController@show']);
     $router->delete('roles/{role}', ['as' => 'roles.destroy', 'uses' => 'Role\RoleController@delete']);
     $router->put('roles/{role}', ['as' => 'roles.update', 'uses' => 'Role\RoleController@update']);
