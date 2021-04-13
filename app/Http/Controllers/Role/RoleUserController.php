@@ -17,6 +17,6 @@ class RoleUserController extends ApiController
     {
         $users = $role->users;
 
-        return $this->showAll($users)
+        return $this->showAll($users);
     }
 }
