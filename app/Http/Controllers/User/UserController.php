@@ -111,8 +111,10 @@ class UserController extends ApiController
      * @param  int  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $user)
     {
+        $user = User::findOrFail($user);
+        
         /**
          * Validation
          */
@@ -132,7 +134,8 @@ class UserController extends ApiController
             $encryptedRoleId = $request->role_id;
 
             // Decrypyt Role Id
-            $decryptedRoleId = \Hashids::connection(\App\Role::class)->decode($encryptedRoleId);
+            // $decryptedRoleId = \Hashids::connection(\App\Role::class)->decode($encryptedRoleId);
+            $decryptedRoleId = $request->role_id;
             $roleId = $decryptedRoleId[0];
         } else {
             $roleOfuser = DB::table('role_user')->where('user_id', $user->id)->first();
@@ -167,7 +170,7 @@ class UserController extends ApiController
         }
 
         if ($request->has('admin')) {
-            $this->allowedAdminAction();
+            // $this->allowedAdminAction();
 
             if (!$user->isAdmin()) {
                 return $this->errorResponse('Only Admin users can modify the admin field', 409);
@@ -183,7 +186,8 @@ class UserController extends ApiController
                 ->update($userRoleAssign);
 
             // Getting Client Details
-            $user->client_details = $this->applicationDetector();
+            // $user->client_details = $this->applicationDetector();
+            $user->client_details = "";
         }
 
         if (!$user->isDirty()) {
@@ -191,7 +195,8 @@ class UserController extends ApiController
         }
 
         // Getting Client Details
-        $user->client_details = $this->applicationDetector();
+        // $user->client_details = $this->applicationDetector();
+        $user->client_details = "";
 
         $user->save();
 
