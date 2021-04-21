@@ -42,7 +42,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('users', ['as' => 'users.store', 'uses' => 'User\UserController@store']);
     $router->get('users', ['as' => 'users.index', 'uses' => 'User\UserController@index']);
-    $router->get('users/{userId}', ['as' => 'users.show', 'uses' => 'User\UserController@show']);
-    $router->put('users/{userId}', ['as' => 'users.update', 'uses' => 'User\UserController@update']);
-    $router->delete('users/{userId}', ['as' => 'users.destroy', 'uses' => 'User\UserController@delete']);
+    $router->get('users/{user}', ['as' => 'users.show', 'uses' => 'User\UserController@show']);
+    $router->put('users/{user}', ['as' => 'users.update', 'uses' => 'User\UserController@update']);
+    $router->delete('users/{user}', ['as' => 'users.destroy', 'uses' => 'User\UserController@delete']);
 });
