@@ -62,12 +62,10 @@ class RoleController extends ApiController
      * @param  int  $roleId
      * @return \Illuminate\Http\Response
      */
-    // public function show($Role $role)
-    public function show($roleId)
+    public function show($role)
     {
-        $role = Role::where('id', $roleId)->get();
-        // return $this->showOne($role);
-        return $role;
+        $role = Role::findOrFail($role);
+        return $this->showOne($role);
     }
 
     /**
