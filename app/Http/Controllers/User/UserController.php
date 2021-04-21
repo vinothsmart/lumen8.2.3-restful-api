@@ -211,8 +211,10 @@ class UserController extends ApiController
      * @param  int  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($user)
     {
+        $user = User::findOrFail($user);
+        
         $user->delete();
         // Delete image
         Storage::delete($user->image);
