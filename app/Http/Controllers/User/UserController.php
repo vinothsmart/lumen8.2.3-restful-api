@@ -65,11 +65,13 @@ class UserController extends ApiController
         // $data['password'] = bcrypt($request->password);
         $data['password'] = Hash::make($request->password);
 
-        if ($request->file('image') == null) {
-            $data['image'] = "default.jpeg";
-        } else {
-            $data['image'] = $request->file('image')->store('');
-        }
+        // if ($request->file('image') == null) {
+        //     $data['image'] = "default.jpeg";
+        // } else {
+        //     $data['image'] = $request->file('image')->store('');
+        // }
+
+        $data['image'] = "default.jpeg";
 
         $data['email_verified_at'] = $isAdmin == true ? date("Y-m-d H:i:s") : null;
         $data['verified'] = $isAdmin == true ? User::VERIFIED_USER : User::UNVERIFIED_USER;
