@@ -65,6 +65,7 @@ class RoleController extends ApiController
     public function show($role)
     {
         $role = Role::findOrFail($role);
+        
         return $this->showOne($role);
     }
 

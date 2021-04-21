@@ -97,8 +97,10 @@ class UserController extends ApiController
      * @param  int  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($user)
     {
+        $user = User::findOrFail($user);
+
         return $this->showOne($user);
     }
 
