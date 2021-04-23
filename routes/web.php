@@ -44,5 +44,5 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('users', ['as' => 'users.index', 'uses' => 'User\UserController@index']);
     $router->get('users/{user}', ['as' => 'users.show', 'uses' => 'User\UserController@show']);
     $router->put('users/{user}', ['as' => 'users.update', 'uses' => 'User\UserController@update']);
-    $router->delete('users/{user}', ['as' => 'users.destroy', 'uses' => 'User\UserController@delete']);
+    $router->delete('users/{user}', ['as' => 'users.destroy', 'uses' => 'User\UserController@destroy']);
 });
