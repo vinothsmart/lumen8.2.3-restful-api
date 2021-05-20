@@ -79,6 +79,27 @@ class RoleController extends ApiController
     public function update(Request $request, $role)
     {
         $role = Role::findOrFail($role);
+
+        // Validation
+        $rules = [
+            'role' => 'required',
+        ];
+
+        $this->validate($request, $rules);
+
+        if ($request->has('role')) {
+            $role->role = $request->role;
+        }
+
+        if (!$role->isDirty()) {
+            return $this->errorResponse('You need to specify a different value to update', 422);
+        }
+
+        $role->client_details = "";
+
+        $role->save();
+
+        return $this->showOne($role);
     }
 
     /**
