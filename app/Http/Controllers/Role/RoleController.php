@@ -105,11 +105,15 @@ class RoleController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($role)
     {
-        //
+        $role = Role::findOrFail($role);
+
+        $role->delete();
+
+        return $this->showOne($role);
     }
 }
