@@ -13,13 +13,12 @@ class RoleUserController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($roleId)
+    public function index($role)
     {
+        $role = Role::findOrFail($role);
+
         $users = $role->users;
 
         return $this->showAll($users);
-        $role = Role::where('id', $roleId)->get();
-        // return $this->showOne($role);
-        return $role;
     }
 }
