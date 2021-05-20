@@ -46,4 +46,5 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('users/{user}', ['as' => 'users.update', 'uses' => 'User\UserController@update']);
     $router->patch('users/{user}', ['as' => 'users.patchupdate', 'uses' => 'User\UserController@update']);
     $router->delete('users/{user}', ['as' => 'users.delete', 'uses' => 'User\UserController@destroy']);
+    $router->get('users/{user}/roles', ['as' => 'users.roles', 'uses' => 'User\UserRoleController@index']);
 });
