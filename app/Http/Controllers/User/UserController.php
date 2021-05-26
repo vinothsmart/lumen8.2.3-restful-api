@@ -181,9 +181,10 @@ class UserController extends ApiController
 
         // Update role
         if ($request->has('role_id')) {
-            $userRoleAssign = ['role_id' => $roleId];
+            $userRoleAssign = ['role_id' => $roleId, 'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' =>date("Y-m-d H:i:s")];
             DB::table('role_user')
-                ->where('user_id', $user->id)
+                ->where('user_id', $user->id, )
                 ->update($userRoleAssign);
 
             // Getting Client Details
