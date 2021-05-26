@@ -81,7 +81,8 @@ class UserController extends ApiController
         $user = User::create($data);
 
         // Adding to Pivot Table
-        $userRoleAssign = ['role_id' => $roleId, 'user_id' => $user->id];
+        $userRoleAssign = ['role_id' => $roleId, 'user_id' => $user->id,'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' =>date("Y-m-d H:i:s")];
 
         DB::table('role_user')
             ->insert($userRoleAssign);
