@@ -19,9 +19,11 @@ class UserCreated extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        $user = User::findOrFail($user);
+        // echo "hai".$user;
+        // die();
+        // $user = User::findOrFail($user);
         
         $this->user = $user;
     }
