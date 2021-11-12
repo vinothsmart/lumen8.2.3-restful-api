@@ -52,14 +52,6 @@ $app->singleton('filesystem', function ($app) {
     return $app->loadComponent('filesystems', 'Illuminate\Filesystem\FilesystemServiceProvider', 'filesystem');
 });
 
-// $app->singleton('filesystem', function ($app) {
-//     return $app->loadComponent(
-//         'filesystems',
-//         Illuminate\Filesystem\FilesystemServiceProvider::class,
-//         'filesystem'
-//     );
-// });
-
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -128,6 +120,8 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 $app->register(Illuminate\Mail\MailServiceProvider::class);
+
+$app->register(Spatie\Fractal\FractalServiceProvider::class);
 
 
 /*
