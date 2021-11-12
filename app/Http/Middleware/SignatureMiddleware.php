@@ -13,13 +13,11 @@ class SignatureMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $headerName = 'X-Name')
     {
-        // Pre-Middleware Action
-
         $response = $next($request);
 
-        // Post-Middleware Action
+        $response->headers->set($headerName, config('app.name'));
 
         return $response;
     }

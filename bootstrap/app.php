@@ -103,6 +103,13 @@ $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+
+$app->routeMiddleware([
+    'signature' => \App\Http\Middleware\SignatureMiddleware::class,
+]);
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
