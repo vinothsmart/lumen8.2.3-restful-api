@@ -24,7 +24,7 @@ class UserCreated extends Mailable
         // echo "hai".$user;
         // die();
         // $user = User::findOrFail($user);
-        
+
         $this->user = $user;
     }
 
@@ -35,6 +35,6 @@ class UserCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.welcome');
+        return $this->markdown('emails.welcome')->subject('Please confirm your account');
     }
 }
